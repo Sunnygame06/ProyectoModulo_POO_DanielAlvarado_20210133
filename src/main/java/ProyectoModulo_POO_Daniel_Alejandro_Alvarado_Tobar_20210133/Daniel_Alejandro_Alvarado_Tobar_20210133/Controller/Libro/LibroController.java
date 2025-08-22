@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -23,11 +24,14 @@ public class LibroController {
     @Autowired
     private LibroService service;
 
+    //Aqui se manda a llamar desde el service para obtener todos los datos, y utilizamos la anotacion @GetMapping para crear una Url que nos ayudara a mostrar todos los libros
     @GetMapping("/getDataLibro")
     public List<LibroDTO> getData(){
         return service.getAllLibros();
     }
 
+    //Aqui se manda a llamar desde el DTO los campos que se requieren validar, caso las respuestas sean nulas se enviara el error de las lineas 40, 41 y 42, en el caso
+    //todo haya salido bien nos enviara success, caso haya un error en interno, es decir en la base de datos, habra un error.
     @PostMapping("/createLibro")
     public ResponseEntity<Map<String, Object>> crear (@Valid @RequestBody LibroDTO libro){
         try{

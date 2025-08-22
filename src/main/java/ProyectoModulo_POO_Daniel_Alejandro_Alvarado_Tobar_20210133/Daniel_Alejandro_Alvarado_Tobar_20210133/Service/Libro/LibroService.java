@@ -26,8 +26,6 @@ public class LibroService {
                 .collect(Collectors.toList());
     }
 
-
-
     public LibroDTO create (LibroDTO libroDto){
         if (libroDto == null){
             throw new IllegalArgumentException("El libro no puede ser nulo");
