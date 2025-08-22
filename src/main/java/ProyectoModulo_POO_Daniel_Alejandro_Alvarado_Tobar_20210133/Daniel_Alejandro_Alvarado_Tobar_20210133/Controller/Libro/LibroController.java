@@ -1,5 +1,6 @@
 package ProyectoModulo_POO_Daniel_Alejandro_Alvarado_Tobar_20210133.Daniel_Alejandro_Alvarado_Tobar_20210133.Controller.Libro;
 
+import ProyectoModulo_POO_Daniel_Alejandro_Alvarado_Tobar_20210133.Daniel_Alejandro_Alvarado_Tobar_20210133.Entity.Libro.LibroEntity;
 import ProyectoModulo_POO_Daniel_Alejandro_Alvarado_Tobar_20210133.Daniel_Alejandro_Alvarado_Tobar_20210133.Exceptions.ExceptionDatoNoEncontrado;
 import ProyectoModulo_POO_Daniel_Alejandro_Alvarado_Tobar_20210133.Daniel_Alejandro_Alvarado_Tobar_20210133.Exceptions.ExceptionDatosDuplicados;
 import ProyectoModulo_POO_Daniel_Alejandro_Alvarado_Tobar_20210133.Daniel_Alejandro_Alvarado_Tobar_20210133.Models.DTO.LibroDTO;
@@ -30,8 +31,24 @@ public class LibroController {
         return service.getAllLibros();
     }
 
+    @GetMapping("/getDataLibro/{id}")
+    public ResponseEntity<?> Buscar (@PathVariable Long id){
+        try{
+            LibroEntity libro = service.SearchById(id);
+            return  ResponseEntity.ok(libro);
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).header(
+                            "X-Mensaje-Error", "Libro no encontrado")
+                    .body(Map.of(
+                            "error","Not found",
+                            "mensaje", "El libro no ha sido encontrado",
+                            "timestamp", Instant.now().toString()
+                    ));
+        }
+    }
+
     //Aqui se manda a llamar desde el DTO los campos que se requieren validar, caso las respuestas sean nulas se enviara el error de las lineas 40, 41 y 42, en el caso
-    //todo haya salido bien nos enviara success, caso haya un error en interno, es decir en la base de datos, habra un error.
+    //todo haya salido bien nos enviara success, caso haya un error interno, es decir en la base de datos, habra un error.
     @PostMapping("/createLibro")
     public ResponseEntity<Map<String, Object>> crear (@Valid @RequestBody LibroDTO libro){
         try{

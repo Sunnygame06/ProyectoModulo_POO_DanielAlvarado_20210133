@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,6 +26,12 @@ public class LibroService {
                 .map(this::convertirADTO)
                 .collect(Collectors.toList());
     }
+
+    public LibroEntity SearchById(Long id){
+        return repo.findById(id).orElseThrow(() ->
+                new ExceptionDatoNoEncontrado("No se encontro el dato"));
+    }
+
 
     public LibroDTO create (LibroDTO libroDto){
         if (libroDto == null){
