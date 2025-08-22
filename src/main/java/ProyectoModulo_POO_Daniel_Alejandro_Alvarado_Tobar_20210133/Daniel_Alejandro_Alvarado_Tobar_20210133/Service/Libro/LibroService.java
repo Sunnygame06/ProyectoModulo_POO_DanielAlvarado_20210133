@@ -20,6 +20,7 @@ public class LibroService {
     @Autowired
     private LibroRepository repo;
 
+    //Aqui se crea el metodo para buscar todos los libros
     public List<LibroDTO> getAllLibros(){
         List<LibroEntity> libros = repo.findAll();
         return libros.stream()
@@ -27,12 +28,13 @@ public class LibroService {
                 .collect(Collectors.toList());
     }
 
+    //Aqui se crea el metodo para buscar el libro por su ID
     public LibroEntity SearchById(Long id){
         return repo.findById(id).orElseThrow(() ->
                 new ExceptionDatoNoEncontrado("No se encontro el dato"));
     }
 
-
+    //Aqui se crea el metodo para crear un libro, donde se manda a llamar al DTO donde se encuentran las validaciones y los campos que se ingresaran
     public LibroDTO create (LibroDTO libroDto){
         if (libroDto == null){
             throw new IllegalArgumentException("El libro no puede ser nulo");
@@ -47,6 +49,7 @@ public class LibroService {
         }
     }
 
+    //Aqui mandamos a llamar los datos que deseamos actualizar, eso se puede ver debido a que aqui el ID no se manda actualizar, solo se llama al ID para saber que libro actualizaremos
     public LibroDTO update (Long id, LibroDTO libro){
         LibroEntity libroExistente = repo.findById(id).orElseThrow(() -> new ExceptionDatoNoEncontrado("Libro no encontrado"));
 
@@ -60,6 +63,7 @@ public class LibroService {
         return convertirADTO(libroActualizado);
     }
 
+    //Aqui mandamos a llamar al libro que deseamos eliminar si lo encuantra lo eliminara, sino, nos dira que no lo encontro
     public boolean delete(Long id){
         try{
             LibroEntity objLibro = repo.findById(id).orElse(null);

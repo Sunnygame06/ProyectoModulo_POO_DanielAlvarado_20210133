@@ -31,6 +31,7 @@ public class LibroController {
         return service.getAllLibros();
     }
 
+    //Aqui mandamos a llamar el libro mediante su ID, caso no se encuentra lanzara un error de que no se ha encontrado, y si lo encuentra mostrara el libro en cuestion
     @GetMapping("/getDataLibro/{id}")
     public ResponseEntity<?> Buscar (@PathVariable Long id){
         try{
@@ -73,6 +74,7 @@ public class LibroController {
         }
     }
 
+    //Aqui mandamos a llamar al libro que deseamos actualizar por medio de su ID, caso todo este bien nos lanzara el libro actualizado, caso contrario nos dira que hubo un error
     @PutMapping("/updateLibro/{id}")
     public ResponseEntity <?> actualizar(
             @PathVariable Long id,
@@ -99,6 +101,7 @@ public class LibroController {
         }
     }
 
+    //Aqui mandamos a llamar al libro que deseamos eliminar por medio de su ID, lo primero que hara es buscar el ID, si lo encuentra se eliminara, caso contrario lanzara un error ya sea interno del sistema o que el dato no existe
     @DeleteMapping("/deleteLibro/{id}")
     public ResponseEntity<Map<String, Object>> eliminar (@PathVariable Long id){
         try{

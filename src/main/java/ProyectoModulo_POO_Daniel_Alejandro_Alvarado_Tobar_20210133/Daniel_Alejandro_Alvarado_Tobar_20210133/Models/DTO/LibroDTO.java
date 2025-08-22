@@ -12,6 +12,7 @@ import java.util.Date;
 @Setter
 public class LibroDTO {
 
+    //Aqui encontraremos los campos de la tabla  con su respectivas validaciones, como el que no pueden ser nulos, o cuanto es lo maximo de caracteres, entre otros mas
     private Long id;
 
     @NotBlank(message = "El titulo no puede ser nulo")

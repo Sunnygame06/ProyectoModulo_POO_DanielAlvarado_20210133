@@ -4,6 +4,7 @@ import ProyectoModulo_POO_Daniel_Alejandro_Alvarado_Tobar_20210133.Daniel_Alejan
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+//Aqui mandamos a llamar al JPA que contiene los
 @Repository
 public interface LibroRepository extends JpaRepository<LibroEntity, Long> {
 }
