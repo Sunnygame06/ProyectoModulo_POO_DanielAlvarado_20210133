@@ -22,7 +22,6 @@ public class LibroDTO {
     @Size(max = 20, message = "El isbn no puede sobrepasar los 20 caracteres")
     private String isbn;
 
-    @Size(max = 4, message = "El año no puede tener mas de 4 caracteres")
     private Long año_publicacion;
 
     @Size(max = 50, message = "La nacionalidad no puede sobrepasar los 50 caracteres")
